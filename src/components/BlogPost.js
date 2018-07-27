@@ -22,7 +22,9 @@ const BlogPost =(props)=> {
                     <div>
                         <div dangerouslySetInnerHTML={{ __html: marked(post[id].body) }} />
                     </div>
+                    {/* 
                     <DisqusThread id={id} title={post[id].title} path={`blog/#/${id}`}/>
+                    */}
                 </ div>
             </DocumentTitle>
         )

@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { Route, Switch,Redirect } from 'react-router-dom'
 
 const BlogView = (props) => {
+
+    const contentArea = (addedProps, id=1515920692705) => (<BlogPost {...addedProps} id={id}/>);
     return (
         <DocumentTitle title={props.blogTitle || ""} >
             <div>
@@ -19,7 +21,19 @@ const BlogView = (props) => {
 
                     </Col>
                     <Col lg={7} md={7} sm={6} xsOffset={0} lgOffset={0}>
-                             <BlogPost {...props} id={props.id || 1515920692705}/>
+                        <Switch>
+			    <Route
+				exact path="/blog"
+				render={
+				    () => (
+					<Redirect
+					    to={`/blog/${Object.keys(props.post)[0]}`}
+					/>
+				    )}
+				/>
+                            <Route path="/blog/:id"  render={(url) => contentArea(props,url.match.params.id)}/>
+                            <Route render={() => contentArea(props)} />
+                         </Switch>
                     </Col>
                 </Row>
 
